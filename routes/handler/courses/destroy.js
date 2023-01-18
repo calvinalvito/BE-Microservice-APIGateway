@@ -11,12 +11,12 @@ module.exports = async (req, res) => {
     const course = await api.delete(`/api/courses/${id}`);
     return res.json(course.data);
   } catch (error) {
-
+    console.log(error.response)
     if (error.code === 'ECONNREFUSED') {
       return res.status(500).json({ status: 'error', message: 'service unavailable' });
     }
 
     const { status, data } = error.response;
-    return res.status(status).json(data);
+    return res.status(200).json(data);
   }
 }
